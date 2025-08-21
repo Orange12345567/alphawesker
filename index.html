@@ -39,6 +39,21 @@
 <body>
   <img src="./alpha-wesker.png" alt="Alpha Wesker image" />
   <div class="caption">Alpha Wesker</div>
-  <audio src="./Recording.mp3" autoplay hidden></audio>
+  <audio id="wesker-audio" src="./Recording.mp3" autoplay muted></audio>
+  <button onclick="document.getElementById('wesker-audio').muted=false; this.style.display='none';"
+    style="
+      margin-top:20px;
+      padding:12px 24px;
+      border:none;
+      border-radius:12px;
+      background:#ff2d2d;
+      color:#fff;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      box-shadow:0 4px 12px rgba(0,0,0,.3);
+    ">
+    🔊 Play Audio
+  </button>
 </body>
 </html>
