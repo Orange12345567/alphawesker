@@ -55,5 +55,33 @@
     ">
     🔊 Play Audio
   </button>
+  <audio id="wesker-audio" src="./Recording.mp3"></audio>
+  <button onclick="playWeskerAudio()" 
+    style="
+      margin-top:20px;
+      padding:12px 24px;
+      border:none;
+      border-radius:12px;
+      background:#ff2d2d;
+      color:#fff;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      box-shadow:0 4px 12px rgba(0,0,0,.3);
+    ">
+    🔊 Play Audio
+  </button>
+
+  <script>
+    function playWeskerAudio() {
+      const audio = document.getElementById('wesker-audio');
+      audio.muted = false;
+      audio.play().catch(err => {
+        console.error("Playback failed:", err);
+        alert("Could not play audio. Check if your browser blocks autoplay.");
+      });
+      event.target.style.display = "none"; // hide button
+    }
+  </script>
 </body>
 </html>
