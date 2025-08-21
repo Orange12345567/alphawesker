@@ -39,49 +39,32 @@
 <body>
   <img src="./alpha-wesker.png" alt="Alpha Wesker image" />
   <div class="caption">Alpha Wesker</div>
-  <audio id="wesker-audio" src="./Recording.mp3" autoplay muted></audio>
-  <button onclick="document.getElementById('wesker-audio').muted=false; this.style.display='none';"
-    style="
-      margin-top:20px;
-      padding:12px 24px;
-      border:none;
-      border-radius:12px;
-      background:#ff2d2d;
-      color:#fff;
-      font-size:18px;
-      font-weight:bold;
-      cursor:pointer;
-      box-shadow:0 4px 12px rgba(0,0,0,.3);
-    ">
-    🔊 Play Audio
-  </button>
-  <audio id="wesker-audio" src="./Recording.mp3"></audio>
-  <button onclick="playWeskerAudio()" 
-    style="
-      margin-top:20px;
-      padding:12px 24px;
-      border:none;
-      border-radius:12px;
-      background:#ff2d2d;
-      color:#fff;
-      font-size:18px;
-      font-weight:bold;
-      cursor:pointer;
-      box-shadow:0 4px 12px rgba(0,0,0,.3);
-    ">
-    🔊 Play Audio
-  </button>
+<audio id="wesker-audio" src="./Recording.mp3"></audio>
+<button id="play-btn" onclick="playWeskerAudio()" 
+  style="
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:12px;
+    background:#ff2d2d;
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,.3);
+  ">
+  🔊 Play Audio
+</button>
 
-  <script>
-    function playWeskerAudio() {
-      const audio = document.getElementById('wesker-audio');
-      audio.muted = false;
-      audio.play().catch(err => {
-        console.error("Playback failed:", err);
-        alert("Could not play audio. Check if your browser blocks autoplay.");
-      });
-      event.target.style.display = "none"; // hide button
-    }
-  </script>
+<script>
+  function playWeskerAudio() {
+    const audio = document.getElementById('wesker-audio');
+    audio.muted = false;
+    audio.play().catch(err => {
+      console.error("Playback failed:", err);
+      alert("Could not play audio. Check if your browser blocks autoplay.");
+    });
+    document.getElementById('play-btn').style.display = "none"; // hide button after click
+  }
+</script>
 </body>
-</html>
