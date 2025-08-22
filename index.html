@@ -44,7 +44,6 @@
     }
     .blue-text { color: #3498db; }
     .serious-text { color: #ffffff; }
-    .orange-text { color: orange; }
 
     /* Buttons */
     .action-btn {
@@ -62,7 +61,6 @@
     #brainrot-btn { background: #00ccff; }
     #bluetiger-btn { background: #3498db; }
     #serious-btn { background: #555555; }
-    #orange-btn { background: orange; }
 
     /* Spin animation */
     .spin { animation: spin 2s linear infinite; }
@@ -90,7 +88,6 @@
   <button id="brainrot-btn" class="action-btn" onclick="activateBrainrot()">🌀 Brainrot</button>
   <button id="bluetiger-btn" class="action-btn" onclick="activateBluetiger()">🐯 Bluetiger</button>
   <button id="serious-btn" class="action-btn" onclick="activateSerious()">😐 Seriously?</button>
-  <button id="orange-btn" class="action-btn" onclick="activateOrange()">🍊 Orange Mode</button>
 
   <script>
     function playWeskerAudio() {
@@ -130,18 +127,8 @@
       img.classList.remove("spin");
 
       const caption = document.getElementById('caption');
-      caption.textContent = "Seriously?";
-      caption.className = "caption serious-text";
-    }
-
-    function activateOrange() {
-      const img = document.getElementById('main-img');
-      img.src = "./alpha-wesker.png";    
-      img.classList.remove("spin");
-
-      const caption = document.getElementById('caption');
       caption.textContent = "Your kidding me right? Mr, Wesker?";
-      caption.className = "caption orange-text";
+      caption.className = "caption serious-text";
     }
   </script>
 </body>
