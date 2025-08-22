@@ -1,147 +1,71 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Alpha Wesker</title>
-  <meta name="description" content="Alpha Wesker with audio and modes" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alpha Wesker Fun</title>
   <style>
-    :root { color-scheme: dark light; }
     body {
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-      background: #0b0b0b;
-      color: #eaeaea;
-      padding: 24px;
+      padding: 20px;
     }
     img {
-      max-width: min(92vw, 1100px);
+      max-width: 80%;
       height: auto;
-      border-radius: 16px;
-      box-shadow: 0 12px 48px rgba(0,0,0,.45);
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+    .buttons {
+      margin: 20px 0;
+    }
+    button {
       background: #222;
+      color: white;
+      border: 2px solid #444;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #444;
     }
     .caption {
-      margin-top: 14px;
-      font-size: clamp(20px, 3.5vw, 42px);
-      font-weight: 800;
-      letter-spacing: .015em;
-      text-shadow: 0 1px 0 rgba(0,0,0,.25);
-    }
-    .alpha { color: #ff2d2d; }
-    .rainbow-text {
-      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-      animation: rainbowShift 3s linear infinite;
-      background-size: 200% auto;
-    }
-    .blue-text { color: #3498db; }
-    .serious-text { color: #ffffff; }
-
-    /* Buttons */
-    .action-btn {
-      margin-top: 20px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 12px;
-      font-size: 18px;
+      margin-top: 15px;
+      font-size: 20px;
       font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,.3);
-      color: #fff;
-    }
-    #play-btn { background: #ff2d2d; }
-    #brainrot-btn { background: #00ccff; }
-    #bluetiger-btn { background: #3498db; }
-    #serious-btn { background: #555555; }
-    #original-btn { background: #00aa55; }
-
-    /* Spin animation */
-    .spin { animation: spin 2s linear infinite; }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* Rainbow animation shift */
-    @keyframes rainbowShift {
-      to { background-position: 200% center; }
+      color: white;
     }
   </style>
 </head>
 <body>
-  <!-- Audio -->
-  <audio id="wesker-audio" src="./Recording.mp3"></audio>
+  <h1>Alpha Wesker Fun Mode</h1>
 
-  <!-- Main Image + Caption -->
-  <img id="main-img" src="./alpha-wesker.png" alt="Alpha Wesker image" />
-  <div id="caption" class="caption alpha">Alpha Wesker</div>
+  <audio controls>
+    <source src="Recording.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-  <!-- Buttons -->
-  <button id="play-btn" class="action-btn" onclick="playWeskerAudio()">🔊 Play Audio</button>
-  <button id="brainrot-btn" class="action-btn" onclick="activateBrainrot()">🌀 Brainrot</button>
-  <button id="bluetiger-btn" class="action-btn" onclick="activateBluetiger()">🐯 Bluetiger</button>
-  <button id="serious-btn" class="action-btn" onclick="activateSerious()">😐 Seriously?</button>
-  <button id="original-btn" class="action-btn" onclick="activateOriginal()">↩️ Original</button>
+  <div class="buttons">
+    <button onclick="setImage('alpha-wesker.png','You are Alpha Wesker')">Alpha Wesker</button>
+    <button onclick="setImage('bluetiger.png','You are Bluetiger')">Bluetiger 🐯</button>
+    <button onclick="setImage('tung.png','You are Tung')">Tung 😤</button>
+    <button onclick="setImage('Serious.png','You are Serious')">Serious 😐</button>
+    <button onclick="setImage('Goon.png','You are Gooning Right Now')">Goon 💦</button>
+  </div>
+
+  <img id="mainImage" src="alpha-wesker.png" alt="Alpha Wesker">
+  <div id="caption" class="caption">You are Alpha Wesker</div>
 
   <script>
-    function playWeskerAudio() {
-      const audio = document.getElementById('wesker-audio');
-      audio.pause();
-      audio.currentTime = 0;
-      audio.muted = false;
-      audio.play().catch(err => {
-        console.error("Playback failed:", err);
-        alert("Could not play audio. Check if your browser blocks autoplay.");
-      });
-    }
-
-    function activateBrainrot() {
-      const img = document.getElementById('main-img');
-      img.src = "./tung.png";    
-      img.classList.add("spin");
-
-      const caption = document.getElementById('caption');
-      caption.textContent = "TuNg TuNg TuNg SaHuR";
-      caption.className = "caption rainbow-text";
-    }
-
-    function activateBluetiger() {
-      const img = document.getElementById('main-img');
-      img.src = "./bluetiger.png";    
-      img.classList.remove("spin");
-
-      const caption = document.getElementById('caption');
-      caption.textContent = "Bluetiger Sucks at COD";
-      caption.className = "caption blue-text";
-    }
-
-    function activateSerious() {
-      const img = document.getElementById('main-img');
-      img.src = "./Serious.png";    
-      img.classList.remove("spin");
-
-      const caption = document.getElementById('caption');
-      caption.textContent = "Your kidding me right? Mr, Wesker?";
-      caption.className = "caption serious-text";
-    }
-
-    function activateOriginal() {
-      const img = document.getElementById('main-img');
-      img.src = "./alpha-wesker.png";    
-      img.classList.remove("spin");
-
-      const caption = document.getElementById('caption');
-      caption.textContent = "Alpha Wesker";
-      caption.className = "caption alpha";
+    function setImage(img, text) {
+      document.getElementById('mainImage').src = img;
+      document.getElementById('caption').innerText = text;
     }
   </script>
 </body>
