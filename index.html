@@ -77,6 +77,8 @@
   <button onclick="setImage('Serious.png','Are you Kidding me bro.','orange')">Serious 😐</button>
   <button onclick="setImage('Goon.png','You are Gooning Right Now','white')">Goon 💦</button>
   <button onclick="setImage('Maverick.png','Too many Big Mac\'s and Whoppers.','green')">Maverick 🍔</button>
+  <button onclick="setImage('troll-face.png','You Got Trolled','white')">Troll Face 😏</button>
+  <button onclick="setImage('rainbow-wesker.png','Chromatic Madness','rainbow')">Rainbow Wesker 🌈</button>
 </div>
 
 <img id="mainImage" src="alpha-wesker.png" alt="Alpha Wesker">
@@ -102,7 +104,7 @@ function setImage(img, text, color) {
   // Apply new color
   if(color === 'rainbow') {
     caption.classList.add('rainbow');
-    mainImage.classList.add('spin'); // Tung spins
+    if(img === 'tung.png') mainImage.classList.add('spin'); // Tung spins only
   } else if(color === 'red') caption.classList.add('red');
   else if(color === 'blue') caption.classList.add('blue');
   else if(color === 'orange') caption.classList.add('orange');
