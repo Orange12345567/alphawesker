@@ -89,12 +89,13 @@
   <script>
     function playWeskerAudio() {
       const audio = document.getElementById('wesker-audio');
+      audio.pause();       // stop if currently playing
+      audio.currentTime = 0; // reset to beginning
       audio.muted = false;
       audio.play().catch(err => {
         console.error("Playback failed:", err);
         alert("Could not play audio. Check if your browser blocks autoplay.");
       });
-      document.getElementById('play-btn').style.display = "none";
     }
 
     function activateBrainrot() {
@@ -110,7 +111,7 @@
     function activateBluetiger() {
       const img = document.getElementById('main-img');
       img.src = "./bluetiger.png";    
-      img.classList.remove("spin"); // stop spinning
+      img.classList.remove("spin");
 
       const caption = document.getElementById('caption');
       caption.textContent = "Bluetiger Sucks at COD";
