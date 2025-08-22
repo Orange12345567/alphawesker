@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Alpha Wesker</title>
-  <meta name="description" content="Alpha Wesker with audio and brainrot mode" />
+  <meta name="description" content="Alpha Wesker with audio and modes" />
   <style>
     :root { color-scheme: dark light; }
     body {
@@ -31,9 +31,18 @@
       font-size: clamp(20px, 3.5vw, 42px);
       font-weight: 800;
       letter-spacing: .015em;
-      color: #ff2d2d;
       text-shadow: 0 1px 0 rgba(0,0,0,.25);
     }
+    .alpha { color: #ff2d2d; }
+    .rainbow-text {
+      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+      animation: rainbowShift 3s linear infinite;
+      background-size: 200% auto;
+    }
+    .blue-text { color: #3498db; }
 
     /* Buttons */
     .action-btn {
@@ -49,29 +58,18 @@
     }
     #play-btn { background: #ff2d2d; }
     #brainrot-btn { background: #00ccff; }
+    #bluetiger-btn { background: #3498db; }
 
     /* Spin animation */
-    .spin {
-      animation: spin 2s linear infinite;
-    }
+    .spin { animation: spin 2s linear infinite; }
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* Rainbow text */
-    .rainbow-text {
-      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-      animation: rainbowShift 3s linear infinite;
-      background-size: 200% auto;
-    }
+    /* Rainbow animation shift */
     @keyframes rainbowShift {
-      to {
-        background-position: 200% center;
-      }
+      to { background-position: 200% center; }
     }
   </style>
 </head>
@@ -81,11 +79,12 @@
 
   <!-- Main Image + Caption -->
   <img id="main-img" src="./alpha-wesker.png" alt="Alpha Wesker image" />
-  <div id="caption" class="caption">Alpha Wesker</div>
+  <div id="caption" class="caption alpha">Alpha Wesker</div>
 
   <!-- Buttons -->
   <button id="play-btn" class="action-btn" onclick="playWeskerAudio()">🔊 Play Audio</button>
   <button id="brainrot-btn" class="action-btn" onclick="activateBrainrot()">🌀 Brainrot</button>
+  <button id="bluetiger-btn" class="action-btn" onclick="activateBluetiger()">🐯 Bluetiger</button>
 
   <script>
     function playWeskerAudio() {
@@ -100,12 +99,22 @@
 
     function activateBrainrot() {
       const img = document.getElementById('main-img');
-      img.src = "./tung.png";    // change to your tung image
+      img.src = "./tung.png";    
       img.classList.add("spin");
 
       const caption = document.getElementById('caption');
       caption.textContent = "TuNg TuNg TuNg SaHuR";
-      caption.classList.add("rainbow-text");
+      caption.className = "caption rainbow-text";
+    }
+
+    function activateBluetiger() {
+      const img = document.getElementById('main-img');
+      img.src = "./bluetiger.png";    
+      img.classList.remove("spin"); // stop spinning
+
+      const caption = document.getElementById('caption');
+      caption.textContent = "Bluetiger Sucks at COD";
+      caption.className = "caption blue-text";
     }
   </script>
 </body>
