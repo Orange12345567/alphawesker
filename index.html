@@ -76,7 +76,7 @@
       to { background-position: 200% center; }
     }
 
-    /* Flappy Bird canvas */
+    /* Flappy Wesker canvas */
     #flappyCanvas {
       display: none;
       background: #70c5ce;
@@ -100,9 +100,9 @@
   <button id="bluetiger-btn" class="action-btn" onclick="activateBluetiger()">🐯 Bluetiger</button>
   <button id="serious-btn" class="action-btn" onclick="activateSerious()">😐 Seriously?</button>
   <button id="original-btn" class="action-btn" onclick="activateOriginal()">↩️ Original</button>
-  <button id="flappy-btn" class="action-btn" onclick="startFlappy()">🐤 Flappy Bird</button>
+  <button id="flappy-btn" class="action-btn" onclick="startFlappy()">🐤 Flappy Wesker</button>
 
-  <!-- Flappy Bird canvas -->
+  <!-- Flappy Wesker canvas -->
   <canvas id="flappyCanvas" width="320" height="480"></canvas>
 
   <script>
@@ -157,7 +157,7 @@
       caption.className = "caption alpha";
     }
 
-    /* Flappy Bird */
+    /* Flappy Wesker */
     function startFlappy() {
       document.getElementById('main-img').style.display = "none";
       document.getElementById('caption').style.display = "none";
@@ -166,12 +166,15 @@
       const cvs = document.getElementById("flappyCanvas");
       const ctx = cvs.getContext("2d");
 
-      // bird
+      let birdImg = new Image();
+      birdImg.src = "./alpha-wesker.png";
+
+      // Bird position and physics
       let birdX = 50;
       let birdY = 150;
-      let gravity = 1.5;
+      let gravity = 0.6;    // smoother gravity
       let velocity = 0;
-      let lift = -25;
+      let lift = -10;       // upward force
 
       // pipes
       let pipes = [];
@@ -184,15 +187,12 @@
         ctx.fillStyle = "#70c5ce";
         ctx.fillRect(0, 0, cvs.width, cvs.height);
 
-        // bird
-        ctx.fillStyle = "yellow";
-        ctx.beginPath();
-        ctx.arc(birdX, birdY, 12, 0, Math.PI * 2);
-        ctx.fill();
+        // draw bird
+        ctx.drawImage(birdImg, birdX - 20, birdY - 20, 40, 40);
 
         // pipes
         for (let i = 0; i < pipes.length; i++) {
-          let pipeGap = 90;
+          let pipeGap = 100;
           let pipeHeight = 200;
 
           ctx.fillStyle = "green";
@@ -209,10 +209,10 @@
           }
 
           // collision
-          if (birdX + 12 >= pipes[i].x && birdX - 12 <= pipes[i].x + 50 &&
-              (birdY - 12 <= pipes[i].y + pipeHeight ||
-               birdY + 12 >= pipes[i].y + pipeHeight + pipeGap) ||
-              birdY + 12 >= cvs.height) {
+          if (birdX + 20 >= pipes[i].x && birdX - 20 <= pipes[i].x + 50 &&
+              (birdY - 20 <= pipes[i].y + pipeHeight ||
+               birdY + 20 >= pipes[i].y + pipeHeight + pipeGap) ||
+              birdY + 20 >= cvs.height) {
             location.reload();
           }
 
@@ -228,15 +228,14 @@
         // score text
         ctx.fillStyle = "#fff";
         ctx.font = "20px Arial";
-        ctx.fillText("Score : " + score, 10, cvs.height - 20);
+        ctx.fillText("Flappy Wesker Score : " + score, 10, cvs.height - 20);
 
         requestAnimationFrame(draw);
       }
 
-      document.addEventListener("keydown", function(e) {
-        if (e.code === "Space") {
-          velocity = lift;
-        }
+      // flap on click
+      cvs.addEventListener("click", function() {
+        velocity = lift;
       });
 
       draw();
