@@ -61,6 +61,7 @@
     #brainrot-btn { background: #00ccff; }
     #bluetiger-btn { background: #3498db; }
     #serious-btn { background: #555555; }
+    #original-btn { background: #00aa55; }
 
     /* Spin animation */
     .spin { animation: spin 2s linear infinite; }
@@ -88,6 +89,7 @@
   <button id="brainrot-btn" class="action-btn" onclick="activateBrainrot()">🌀 Brainrot</button>
   <button id="bluetiger-btn" class="action-btn" onclick="activateBluetiger()">🐯 Bluetiger</button>
   <button id="serious-btn" class="action-btn" onclick="activateSerious()">😐 Seriously?</button>
+  <button id="original-btn" class="action-btn" onclick="activateOriginal()">↩️ Original</button>
 
   <script>
     function playWeskerAudio() {
@@ -129,6 +131,16 @@
       const caption = document.getElementById('caption');
       caption.textContent = "Your kidding me right? Mr, Wesker?";
       caption.className = "caption serious-text";
+    }
+
+    function activateOriginal() {
+      const img = document.getElementById('main-img');
+      img.src = "./alpha-wesker.png";    
+      img.classList.remove("spin");
+
+      const caption = document.getElementById('caption');
+      caption.textContent = "Alpha Wesker";
+      caption.className = "caption alpha";
     }
   </script>
 </body>
