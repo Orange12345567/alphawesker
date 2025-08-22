@@ -18,16 +18,7 @@
       height: auto;
       margin-top: 20px;
       border-radius: 12px;
-      transition: transform 0.3s ease-in-out;
     }
-    .spin {
-      animation: spin 3s linear infinite;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
     .buttons {
       margin: 20px 0;
     }
@@ -44,62 +35,35 @@
     button:hover {
       background: #444;
     }
-
-    /* Custom button colors */
-    .alpha-btn { color: red; border-color: red; }
-    .alpha-btn:hover { background: red; color: black; }
-
-    .blue-btn { color: #00aaff; border-color: #00aaff; }
-    .blue-btn:hover { background: #00aaff; color: black; }
-
-    .rainbow-btn {
-      border: 2px solid transparent;
-      background-image: linear-gradient(#222,#222), 
-                        linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
-      color: white;
-    }
-    .rainbow-btn:hover {
-      color: yellow;
-    }
-
-    .orange-btn { color: orange; border-color: orange; }
-    .orange-btn:hover { background: orange; color: black; }
-
-    .green-btn { color: limegreen; border-color: limegreen; }
-    .green-btn:hover { background: limegreen; color: black; }
-
     .caption {
       margin-top: 15px;
       font-size: 20px;
       font-weight: bold;
-      color: white;
     }
-    .caption.red { color: red; }
-    .caption.blue { color: #00aaff; }
-    .caption.orange { color: orange; }
-    .caption.green { color: limegreen; }
-    .caption.rainbow {
-      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-      -webkit-background-clip: text;
-      color: transparent;
-      background-size: 400% 100%;
-      animation: rainbowMove 4s linear infinite;
+    /* Rainbow animation for Tung */
+    @keyframes rainbow {
+      0% {color: red;}
+      20% {color: orange;}
+      40% {color: yellow;}
+      60% {color: green;}
+      80% {color: blue;}
+      100% {color: violet;}
     }
-
-    @keyframes rainbowMove {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+    .rainbow {
+      animation: rainbow 2s linear infinite;
     }
-
-    h1 {
-      color: orange;
+    /* Spin animation for Tung image */
+    .spin {
+      animation: spin 3s linear infinite;
+    }
+    @keyframes spin {
+      from {transform: rotate(0deg);}
+      to {transform: rotate(360deg);}
     }
   </style>
 </head>
 <body>
-  <h1>Alpha Wesker</h1>
+  <h1 style="color: orange;">Alpha Wesker</h1>
 
   <audio controls>
     <source src="Recording.mp3" type="audio/mpeg">
@@ -107,40 +71,40 @@
   </audio>
 
   <div class="buttons">
-    <button class="alpha-btn" onclick="setImage('alpha-wesker.png','You are Alpha Wesker','red')">Alpha Wesker</button>
-    <button class="blue-btn" onclick="setImage('bluetiger.png','Bluetiger Sucks at COD','blue')">Bluetiger 🐯</button>
-    <button class="rainbow-btn" onclick="setImage('tung.png','Tung Tung Tung Sahur','rainbow','spin')">Tung 😤</button>
-    <button class="orange-btn" onclick="setImage('Serious.png','Are you Kidding me bro.','orange')">Serious 😐</button>
+    <button onclick="setImage('alpha-wesker.png','You are Alpha Wesker','red')">Alpha Wesker</button>
+    <button onclick="setImage('bluetiger.png','Bluetiger Sucks at COD','blue')">Bluetiger 🐯</button>
+    <button onclick="setImage('tung.png','Tung Tung Tung Sahur','rainbow')">Tung 😤</button>
+    <button onclick="setImage('Serious.png','Are you Kidding me bro.','orange')">Serious 😐</button>
     <button onclick="setImage('Goon.png','You are Gooning Right Now','white')">Goon 💦</button>
-    <button class="green-btn" onclick="setImage('Maverick.png','Too many Big Mac\\'s and Whoppers.','green')">Maverick 🍔</button>
+    <button onclick="setImage('Maverick.png','Too many Big Mac\\'s and Whoppers.','green')">Maverick 🍔</button>
   </div>
 
   <img id="mainImage" src="alpha-wesker.png" alt="Alpha Wesker">
-  <div id="caption" class="caption red">You are Alpha Wesker</div>
+  <div id="caption" class="caption">You are Alpha Wesker</div>
 
   <script>
-    function setImage(img, text, color, extra) {
+    function setImage(img, text, color) {
       const mainImage = document.getElementById('mainImage');
+      const caption = document.getElementById('caption');
+
+      // Reset styles
+      mainImage.classList.remove('spin');
+      caption.classList.remove('rainbow');
+
+      // Apply new image
       mainImage.src = img;
 
-      // Reset spin each time
-      mainImage.className = '';
-      if (extra === 'spin') {
-        mainImage.classList.add('spin');
-      }
-
-      const caption = document.getElementById('caption');
-      caption.className = 'caption'; // reset
+      // Apply caption text
       caption.innerText = text;
 
-      if (color === 'red') caption.classList.add('red');
-      if (color === 'blue') caption.classList.add('blue');
-      if (color === 'rainbow') caption.classList.add('rainbow');
-      if (color === 'orange') caption.classList.add('orange');
-      if (color === 'green') caption.classList.add('green');
-      // leave white as default
+      // Handle special cases
+      if (color === 'rainbow') {
+        caption.classList.add('rainbow');
+        mainImage.classList.add('spin'); // Tung spins
+      } else {
+        caption.style.color = color;
+      }
     }
   </script>
 </body>
 </html>
-
