@@ -18,7 +18,16 @@
       height: auto;
       margin-top: 20px;
       border-radius: 12px;
+      transition: transform 0.3s ease-in-out;
     }
+    .spin {
+      animation: spin 3s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     .buttons {
       margin: 20px 0;
     }
@@ -58,6 +67,9 @@
     .orange-btn { color: orange; border-color: orange; }
     .orange-btn:hover { background: orange; color: black; }
 
+    .green-btn { color: limegreen; border-color: limegreen; }
+    .green-btn:hover { background: limegreen; color: black; }
+
     .caption {
       margin-top: 15px;
       font-size: 20px;
@@ -67,6 +79,7 @@
     .caption.red { color: red; }
     .caption.blue { color: #00aaff; }
     .caption.orange { color: orange; }
+    .caption.green { color: limegreen; }
     .caption.rainbow {
       background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
       -webkit-background-clip: text;
@@ -96,17 +109,26 @@
   <div class="buttons">
     <button class="alpha-btn" onclick="setImage('alpha-wesker.png','You are Alpha Wesker','red')">Alpha Wesker</button>
     <button class="blue-btn" onclick="setImage('bluetiger.png','Bluetiger Sucks at COD','blue')">Bluetiger 🐯</button>
-    <button class="rainbow-btn" onclick="setImage('tung.png','Tung Tung Tung Sahur','rainbow')">Tung 😤</button>
+    <button class="rainbow-btn" onclick="setImage('tung.png','Tung Tung Tung Sahur','rainbow','spin')">Tung 😤</button>
     <button class="orange-btn" onclick="setImage('Serious.png','Are you Kidding me bro.','orange')">Serious 😐</button>
     <button onclick="setImage('Goon.png','You are Gooning Right Now','white')">Goon 💦</button>
+    <button class="green-btn" onclick="setImage('Maverick.png','Too many Big Mac\\'s and Whoppers.','green')">Maverick 🍔</button>
   </div>
 
   <img id="mainImage" src="alpha-wesker.png" alt="Alpha Wesker">
   <div id="caption" class="caption red">You are Alpha Wesker</div>
 
   <script>
-    function setImage(img, text, color) {
-      document.getElementById('mainImage').src = img;
+    function setImage(img, text, color, extra) {
+      const mainImage = document.getElementById('mainImage');
+      mainImage.src = img;
+
+      // Reset spin each time
+      mainImage.className = '';
+      if (extra === 'spin') {
+        mainImage.classList.add('spin');
+      }
+
       const caption = document.getElementById('caption');
       caption.className = 'caption'; // reset
       caption.innerText = text;
@@ -115,8 +137,10 @@
       if (color === 'blue') caption.classList.add('blue');
       if (color === 'rainbow') caption.classList.add('rainbow');
       if (color === 'orange') caption.classList.add('orange');
+      if (color === 'green') caption.classList.add('green');
       // leave white as default
     }
   </script>
 </body>
 </html>
+
