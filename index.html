@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Alpha Wesker Fun</title>
+  <title>Alpha Wesker</title>
   <style>
     body {
       background: black;
@@ -35,16 +35,47 @@
     button:hover {
       background: #444;
     }
+
+    /* Custom button colors */
+    .alpha-btn { color: red; border-color: red; }
+    .alpha-btn:hover { background: red; color: black; }
+
+    .blue-btn { color: #00aaff; border-color: #00aaff; }
+    .blue-btn:hover { background: #00aaff; color: black; }
+
+    .rainbow-btn {
+      border: 2px solid transparent;
+      background-image: linear-gradient(#222,#222), 
+                        linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      color: white;
+    }
+    .rainbow-btn:hover {
+      color: yellow;
+    }
+
+    .orange-btn { color: orange; border-color: orange; }
+    .orange-btn:hover { background: orange; color: black; }
+
     .caption {
       margin-top: 15px;
       font-size: 20px;
       font-weight: bold;
       color: white;
     }
+    .caption.red { color: red; }
+    .caption.blue { color: #00aaff; }
+    .caption.rainbow {
+      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .caption.orange { color: orange; }
   </style>
 </head>
 <body>
-  <h1>Alpha Wesker Fun Mode</h1>
+  <h1>Alpha Wesker</h1>
 
   <audio controls>
     <source src="Recording.mp3" type="audio/mpeg">
@@ -52,20 +83,28 @@
   </audio>
 
   <div class="buttons">
-    <button onclick="setImage('alpha-wesker.png','You are Alpha Wesker')">Alpha Wesker</button>
-    <button onclick="setImage('bluetiger.png','You are Bluetiger')">Bluetiger 🐯</button>
-    <button onclick="setImage('tung.png','You are Tung')">Tung 😤</button>
-    <button onclick="setImage('Serious.png','You are Serious')">Serious 😐</button>
-    <button onclick="setImage('Goon.png','You are Gooning Right Now')">Goon 💦</button>
+    <button class="alpha-btn" onclick="setImage('alpha-wesker.png','You are Alpha Wesker','red')">Alpha Wesker</button>
+    <button class="blue-btn" onclick="setImage('bluetiger.png','You are Bluetiger','blue')">Bluetiger 🐯</button>
+    <button class="rainbow-btn" onclick="setImage('tung.png','You are Tung','rainbow')">Tung 😤</button>
+    <button class="orange-btn" onclick="setImage('Serious.png','You are Serious','orange')">Serious 😐</button>
+    <button onclick="setImage('Goon.png','You are Gooning Right Now','white')">Goon 💦</button>
   </div>
 
   <img id="mainImage" src="alpha-wesker.png" alt="Alpha Wesker">
-  <div id="caption" class="caption">You are Alpha Wesker</div>
+  <div id="caption" class="caption red">You are Alpha Wesker</div>
 
   <script>
-    function setImage(img, text) {
+    function setImage(img, text, color) {
       document.getElementById('mainImage').src = img;
-      document.getElementById('caption').innerText = text;
+      const caption = document.getElementById('caption');
+      caption.className = 'caption'; // reset
+      caption.innerText = text;
+
+      if (color === 'red') caption.classList.add('red');
+      if (color === 'blue') caption.classList.add('blue');
+      if (color === 'rainbow') caption.classList.add('rainbow');
+      if (color === 'orange') caption.classList.add('orange');
+      // leave white as default
     }
   </script>
 </body>
